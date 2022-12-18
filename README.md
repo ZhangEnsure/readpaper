@@ -6,13 +6,17 @@
 
 从经典的 CNN 卷积神经网络出发：
 
-1. AlexNet（22.12.17已更）
-2. VGG（未更）
-3. NIN（未更）
-4. GoogLeNet（未更）
-5. ResNet（未更）
+| 网络结构 |                                    学习记录                                    | 时间       |
+| :-------: | :----------------------------------------------------------------------------: | ---------- |
+|  AlexNet  | [语雀-AlexNet](https://www.yuque.com/shuoouba/deeplearning/syg020gvb5m1c2k9 "None")  | 2022-12-18 |
+|    VGG    |                                      未更                                      |            |
+|    NIN    |                                      未更                                      |            |
+| GoogLeNet |                                      未更                                      |            |
+|  ResNet  |                                      未更                                      |            |
 
 轻量化 CNN 网络
 
-1. MobileNet V1（未更）
-2. MobileNet V2（未更）
+|   网络结构   | 学习记录 | 时间 |
+| :----------: | :------: | ---- |
+| MobileNet V1 |   未更   |      |
+| MobileNet V2 |   未更   |      |
