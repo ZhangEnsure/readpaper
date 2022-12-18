@@ -8,4 +8,4 @@ resize = 227
 dropout = 0.5
 batch_size = 64
 lr = 1e-1
-num_epochs = 20
+num_epochs = 10
