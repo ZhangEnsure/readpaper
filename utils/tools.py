@@ -5,7 +5,7 @@ import torch.nn as nn
 from IPython import display
 from matplotlib import pyplot as plt
 from matplotlib_inline import backend_inline
-from d2l import torch as d2l
+# from d2l import torch as d2l
 import time
 
 
@@ -170,7 +170,7 @@ def evaluate_accuracy_gpu(net, data_iter, device=None):
         if not device:
             device = next(iter(net.parameters())).device
     # No. of correct predictions, no. of predictions
-    metric = d2l.Accumulator(2)
+    metric = Accumulator(2)
 
     with torch.no_grad():
         for X, y in data_iter:
@@ -201,7 +201,7 @@ def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
     for epoch in range(num_epochs):
         print(f"Epoch: {epoch}/{num_epochs}")
         # Sum of training loss, sum of training accuracy, no. of examples
-        metric = d2l.Accumulator(3)
+        metric = Accumulator(3)
         net.train()
         for i, (X, y) in enumerate(train_iter):
             timer.start()
