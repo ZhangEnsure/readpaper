@@ -6,13 +6,13 @@
 
 从经典的 CNN 卷积神经网络出发：
 
-| 网络结构 |                                                         学习记录                                                         | 时间       |
-| :-------: | :----------------------------------------------------------------------------------------------------------------------: | ---------- |
-|  AlexNet  |                      [语雀-AlexNet](https://www.yuque.com/shuoouba/deeplearning/syg020gvb5m1c2k9 "None")                      | 2022-12-18 |
-|    VGG    |                                                           未更                                                           |            |
-|    NIN    | [语雀-Network in Network](https://www.yuque.com/shuoouba/deeplearning/hwp2vtzcn5oo0abm?singleDoc# 《Nin经典卷积神经网络》)  | 2023-03-02 |
-| GoogLeNet |                                                           未更                                                           |            |
-|  ResNet  |                                                           未更                                                           |            |
+| 网络结构 |                                       学习记录                                       | 时间       |
+| :-------: | :----------------------------------------------------------------------------------: | ---------- |
+|  AlexNet  |    [语雀-AlexNet](https://www.yuque.com/shuoouba/deeplearning/syg020gvb5m1c2k9 "None")    | 2022-12-18 |
+|    VGG    |                                         未更                                         |            |
+|    NIN    | [语雀-Network in Network](https://www.yuque.com/shuoouba/deeplearning/hwp2vtzcn5oo0abm) | 2023-03-02 |
+| GoogLeNet |                                         未更                                         |            |
+|   esNet   |                                         未更                                         |            |
 
 轻量化 CNN 网络
 
