@@ -12,7 +12,7 @@
 |    VGG    |                                         未更                                         |            |
 |    NIN    | [语雀-Network in Network](https://www.yuque.com/shuoouba/deeplearning/hwp2vtzcn5oo0abm) | 2023-03-02 |
 | GoogLeNet |                                         未更                                         |            |
-|   esNet   |                                         未更                                         |            |
+|  ResNet  |                                         未更                                         |            |
 
 轻量化 CNN 网络
 
