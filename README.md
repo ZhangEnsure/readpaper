@@ -20,15 +20,15 @@
 
 ### 经典 CNN 卷积
 
-| 年份 |     名字     |                                                学习记录                                                | 更新时间   |
-| ---- | :----------: | :-----------------------------------------------------------------------------------------------------: | ---------- |
-| 2012 |   AlexNet   |              [语雀-AlexNet](https://www.yuque.com/shuoouba/deeplearning/syg020gvb5m1c2k9 "None")              | 2022-12-18 |
-| 2014 |     VGG     |                                                  未更                                                  |            |
-| 2014 |     NIN     |          [语雀-Network in Network](https://www.yuque.com/shuoouba/deeplearning/hwp2vtzcn5oo0abm)          | 2023-03-02 |
-| 2014 |  GoogLeNet  |               [语雀-googlenet](https://www.yuque.com/shuoouba/deeplearning/vmzoqkggrsn2epg4)               | 2023-03-09 |
-| 2015 | GoogLeNet V2 |          [语雀-batch normalization](https://www.yuque.com/shuoouba/deeplearning/zbrwgyo8l7a2l60b)          | 2023-03-16 |
-| 2015 |    ResNet    | [语雀-ResNet](https://www.yuque.com/shuoouba/deeplearning/vz3p093p363ph1a9?singleDoc# 《ResNet 学习笔记》) | 2023-03-23 |
-| 2015 | GoogLeNet V3 |                                                  未更                                                  |            |
+| 年份 |     名字     |                                       学习记录                                       | 更新时间   |
+| ---- | :----------: | :-----------------------------------------------------------------------------------: | ---------- |
+| 2012 |   AlexNet   |     [语雀-AlexNet](https://www.yuque.com/shuoouba/deeplearning/syg020gvb5m1c2k9 "None")     | 2022-12-18 |
+| 2014 |     VGG     |                                         未更                                         |            |
+| 2014 |     NIN     | [语雀-Network in Network](https://www.yuque.com/shuoouba/deeplearning/hwp2vtzcn5oo0abm) | 2023-03-02 |
+| 2014 |  GoogLeNet  |      [语雀-googlenet](https://www.yuque.com/shuoouba/deeplearning/vmzoqkggrsn2epg4)      | 2023-03-09 |
+| 2015 | GoogLeNet V2 | [语雀-batch normalization](https://www.yuque.com/shuoouba/deeplearning/zbrwgyo8l7a2l60b) | 2023-03-16 |
+| 2015 |    ResNet    |       [语雀-ResNet](https://www.yuque.com/shuoouba/deeplearning/vz3p093p363ph1a9)       | 2023-03-23 |
+| 2015 | GoogLeNet V3 |                                         未更                                         |            |
 
 ### 轻量化 CNN 网络
 
