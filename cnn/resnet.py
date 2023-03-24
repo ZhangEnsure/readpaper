@@ -108,8 +108,12 @@ def resnet_block_layer_3(input_channels, num_channels, output_channels,
             blk.append(Residual_layer_3(input_channels, num_channels, output_channels,
                                 use_1x1conv=True, strides=2))
         else:
-            blk.append(Residual_layer_3(input_channels, num_channels, output_channels,
+            if i != 0:
+                blk.append(Residual_layer_3(input_channels, num_channels, output_channels,
                                 use_1x1conv=False, strides=1))
+            else:
+                blk.append(Residual_layer_3(input_channels, num_channels, output_channels,
+                                use_1x1conv=True, strides=1))
     return blk
 
 
@@ -135,3 +139,10 @@ def get_resnet50():
                         nn.AdaptiveAvgPool2d((1,1)),
                         nn.Flatten(), nn.Linear(1024, 10))
     return ResNet50
+
+
+net = get_resnet50()
+X = torch.rand(size=(1, 3, 224, 224))
+for layer in net:
+    X = layer(X)
+    print(layer.__class__.__name__,'output shape:\t', X.shape)
