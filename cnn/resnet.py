@@ -109,7 +109,7 @@ def resnet_block_layer_3(input_channels, num_channels, output_channels,
                                 use_1x1conv=True, strides=2))
         else:
             if i != 0:
-                blk.append(Residual_layer_3(input_channels, num_channels, output_channels,
+                blk.append(Residual_layer_3(output_channels, num_channels, output_channels,
                                 use_1x1conv=False, strides=1))
             else:
                 blk.append(Residual_layer_3(input_channels, num_channels, output_channels,
@@ -137,7 +137,7 @@ def get_resnet50():
 
     ResNet50 = nn.Sequential(b1, b2, b3, b4, b5,
                         nn.AdaptiveAvgPool2d((1,1)),
-                        nn.Flatten(), nn.Linear(1024, 10))
+                        nn.Flatten(), nn.Linear(2048, 10))
     return ResNet50
 
 
