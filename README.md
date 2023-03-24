@@ -28,6 +28,7 @@
 | 2014 |  GoogLeNet  |      [语雀-googlenet](https://www.yuque.com/shuoouba/deeplearning/vmzoqkggrsn2epg4)      | 2023-03-09 |
 | 2015 | GoogLeNet V2 | [语雀-batch normalization](https://www.yuque.com/shuoouba/deeplearning/zbrwgyo8l7a2l60b) | 2023-03-16 |
 | 2015 |    ResNet    |                                     [语雀-ResNet]()                                     | 2023-03-23 |
+| 2015 | GoogLeNet V3 |                                                                                      |            |
 
 ### 轻量化 CNN 网络
 
