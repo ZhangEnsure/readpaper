@@ -3,12 +3,113 @@ from torch import nn, Tensor
 from torch.nn import functional as F
 from typing import Any, Callable, List, Optional, Tuple
 
+# pip install torchsummary
+from torchsummary import summary
+
 '''
 Inception结构图
 https://www.yuque.com/shuoouba/deeplearning/lq5ib9zqrbqlaa72
 '''
 
 
+class Inception3(nn.Module):
+    '''
+    没有附加分类器
+    '''
+
+    def __init__(
+            self,
+            num_classes: int = 1000,
+            dropout: float = 0.5
+    ) -> None:
+        super().__init__()
+        inception_blocks = [BasicConv2d, InceptionA,
+                            InceptionB, InceptionC, InceptionD, InceptionE]
+        conv_block = inception_blocks[0]
+        inception_a = inception_blocks[1]
+        inception_b = inception_blocks[2]
+        inception_c = inception_blocks[3]
+        inception_d = inception_blocks[4]
+        inception_e = inception_blocks[5]
+
+        self.Conv2d_1a_3x3 = conv_block(3, 32, kernel_size=3, stride=2)
+        self.Conv2d_2a_3x3 = conv_block(32, 32, kernel_size=3)
+        self.Conv2d_2b_3x3 = conv_block(32, 64, kernel_size=3, padding=1)
+        self.maxpool1 = nn.MaxPool2d(kernel_size=3, stride=2)
+        self.Conv2d_3b_1x1 = conv_block(64, 80, kernel_size=1)
+        self.Conv2d_4a_3x3 = conv_block(80, 192, kernel_size=3)
+        self.maxpool2 = nn.MaxPool2d(kernel_size=3, stride=2)
+
+        self.Mixed_5b = inception_a(192, pool_features=32)
+        self.Mixed_5c = inception_a(256, pool_features=64)
+        self.Mixed_5d = inception_a(288, pool_features=64)
+
+        self.Mixed_6a = inception_b(288)
+        self.Mixed_6b = inception_c(768, c7=128)
+        self.Mixed_6c = inception_c(768, c7=160)
+        self.Mixed_6d = inception_c(768, c7=160)
+        self.Mixed_6e = inception_c(768, c7=192)
+
+        self.Mixed_7a = inception_d(768)
+        self.Mixed_7b = inception_e(1280)
+        self.Mixed_7c = inception_e(2048)
+
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        self.dropout = nn.Dropout(p=dropout)
+        self.fc = nn.Linear(2048, num_classes)
+
+    def forward(self, x: Tensor) -> Tensor:
+        # N x 3 x 299 x 299
+        x = self.Conv2d_1a_3x3(x)
+        # N x 32 x 149 x 149
+        x = self.Conv2d_2a_3x3(x)
+        # N x 32 x 147 x 147
+        x = self.Conv2d_2b_3x3(x)
+        # N x 64 x 147 x 147
+        x = self.maxpool1(x)
+        # N x 64 x 73 x 73
+        x = self.Conv2d_3b_1x1(x)
+        # N x 80 x 73 x 73
+        x = self.Conv2d_4a_3x3(x)
+        # N x 192 x 71 x 71
+        x = self.maxpool2(x)
+
+        # N x 192 x 35 x 35
+        x = self.Mixed_5b(x)
+        # N x 256 x 35 x 35
+        x = self.Mixed_5c(x)
+        # N x 288 x 35 x 35
+        x = self.Mixed_5d(x)
+
+        # N x 288 x 35 x 35
+        x = self.Mixed_6a(x)
+        # N x 768 x 17 x 17
+        x = self.Mixed_6b(x)
+        # N x 768 x 17 x 17
+        x = self.Mixed_6c(x)
+        # N x 768 x 17 x 17
+        x = self.Mixed_6d(x)
+        # N x 768 x 17 x 17
+        x = self.Mixed_6e(x)
+
+        # N x 768 x 17 x 17
+        x = self.Mixed_7a(x)
+        # N x 1280 x 8 x 8
+        x = self.Mixed_7b(x)
+        # N x 2048 x 8 x 8
+        x = self.Mixed_7c(x)
+
+        # N x 2048 x 8 x 8
+        # Adaptive average pooling
+        x = self.avgpool(x)
+        # N x 2048 x 1 x 1
+        x = self.dropout(x)
+        # N x 2048 x 1 x 1
+        x = torch.flatten(x, 1)
+        # N x 2048
+        x = self.fc(x)
+        # N x 1000 (num_classes)
+        return x
 
 
 class BasicConv2d(nn.Module):
@@ -74,7 +175,7 @@ class InceptionB(nn.Module):
     def _forward(self, x: Tensor) -> List[Tensor]:
         branch3x3 = self.branch3x3(x)
         branch3x3dbl = self.branch3x3dbl_3(
-            self.branch3x3dbl_2(self.branch3x3dbl_3(x)))
+            self.branch3x3dbl_2(self.branch3x3dbl_1(x)))
         branch_pool = self.branch_pool(x)
 
         return [branch3x3, branch_pool, branch3x3dbl]
@@ -182,12 +283,24 @@ class InceptionE(nn.Module):
 
     def _forward(self, x: Tensor) -> List[Tensor]:
         branch1x1 = self.branch1x1(x)
+
         branch_pool = self.branch_pool_conv(self.branch_pool(x))
-        branch1x3x1dbl = self.branch1x3x1dbl_3(
-            self.branch1x3x1dbl_2(self.branch1x3x1dbl_1(x)))
-        branch3x3dbl = self.branch3x3dbl_4(self.branch3x3dbl_3(
-            self.branch3x3dbl_2(self.branch3x3dbl_1(x))))
-        return [branch1x1, branch_pool, branch1x3x1dbl, branch3x3dbl]
+
+        branch1x3x1dbl_1 = self.branch1x3x1dbl_3(self.branch1x3x1dbl_1(x))
+        branch1x3x1dbl_2 = self.branch1x3x1dbl_2(self.branch1x3x1dbl_1(x))
+
+        branch3x3dbl_1 = self.branch3x3dbl_4(
+            self.branch3x3dbl_2(self.branch3x3dbl_1(x)))
+        branch3x3dbl_2 = self.branch3x3dbl_3(
+            self.branch3x3dbl_2(self.branch3x3dbl_1(x)))
+
+        return [branch1x1, branch_pool, branch1x3x1dbl_1, branch1x3x1dbl_2, branch3x3dbl_1, branch3x3dbl_2]
 
     def forward(self, x: Tensor) -> Tensor:
         return torch.cat(self._forward(x), dim=1)
+
+
+x = torch.rand(size=(10, 3, 299, 299))
+net = Inception3().cuda()
+# print(net(x))
+# summary(model=net, input_size=(3,168, 168), batch_size=10, device="cuda")
