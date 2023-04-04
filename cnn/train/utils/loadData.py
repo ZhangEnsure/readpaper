@@ -26,9 +26,9 @@ def load_data_cifar10(batch_size, resize=None):
         trans.insert(0, transforms.Resize(resize))
     trans = transforms.Compose(trans)
     cifar_train = torchvision.datasets.CIFAR10(
-        root="../../data", train=True, transform=trans, download=True)
+        root="../../../data", train=True, transform=trans, download=True)
     cifar_test = torchvision.datasets.CIFAR10(
-        root="../../data", train=False, transform=trans, download=True)
+        root="../../../data", train=False, transform=trans, download=True)
     return (data.DataLoader(cifar_train, batch_size, shuffle=True,
                             num_workers=2),
             data.DataLoader(cifar_test, batch_size, shuffle=False,

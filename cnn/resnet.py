@@ -141,8 +141,8 @@ def get_resnet50():
     return ResNet50
 
 
-net = get_resnet50()
-X = torch.rand(size=(1, 3, 224, 224))
-for layer in net:
-    X = layer(X)
-    print(layer.__class__.__name__,'output shape:\t', X.shape)
+# net = get_resnet50()
+# X = torch.rand(size=(1, 3, 224, 224))
+# for layer in net:
+#     X = layer(X)
+#     print(layer.__class__.__name__,'output shape:\t', X.shape)
