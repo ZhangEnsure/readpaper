@@ -4,12 +4,15 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import roc_auc_score
 
+import warnings
+warnings.filterwarnings("ignore")
+
 import torch
 import numpy as np
 
 
-def train_one_batch(images, labels, device, net, criterion,
-                    optimizer, epoch, batch_idx):
+def train_one_batch(images, labels, device, net, optimizer,criterion,
+                    epoch, batch_idx):
     '''
     运行一个 batch 的训练，返回当前 batch 的训练日志
     '''
