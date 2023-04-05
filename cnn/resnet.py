@@ -149,6 +149,12 @@ X = torch.rand(size=(1, 3, 224, 224))
 #     X = layer(X)
 #     print(layer.__class__.__name__,'output shape:\t', X.shape)
 
+# net[5] = nn.Sequential(
+#     nn.AdaptiveAvgPool2d((1,1)),
+#     nn.Dropout(p=0.5)
+# )
+# print(net)
+
 '''
 查看模型结果的四种方法
 
