@@ -2,6 +2,8 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
+from torchsummary import summary
+
 class Residual_layer_2(nn.Module):  
     def __init__(self, input_channels, num_channels,
                  use_1x1conv=False, strides=1):
@@ -141,8 +143,38 @@ def get_resnet50():
     return ResNet50
 
 
-# net = get_resnet50()
-# X = torch.rand(size=(1, 3, 224, 224))
+net = get_resnet50()
+X = torch.rand(size=(1, 3, 224, 224))
 # for layer in net:
 #     X = layer(X)
 #     print(layer.__class__.__name__,'output shape:\t', X.shape)
+
+'''
+查看模型结果的四种方法
+
+way1:直接打印模型网络
+'''
+
+# print(net)
+
+'''
+way2:使用net.children()方法
+'''
+
+# for i in net.children():
+#     print(i)
+#     print("=============")
+
+'''
+way3:使用net.modules()方法
+'''
+
+# for i in net.modules():
+#     print(i)
+#     print("=============")
+
+'''
+way4:使用summary方法
+'''
+# summary(model=net, input_size=(3,168, 168), batch_size=10, device="cuda")
+
