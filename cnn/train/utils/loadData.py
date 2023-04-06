@@ -22,10 +22,10 @@ def load_data_fashion_mnist(batch_size, resize=None):
 def load_data_cifar10(batch_size, resize=None):
     """下载Fashion-MNIST数据集，然后将其加载到内存中"""
     train_trans = [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)), transforms.RandomHorizontalFlip()]
-    test_trans = [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)), transforms.Resize(256)]
+    test_trans = [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
     if resize:
         # 测试集中心裁剪
-        test_trans.insert(0, transforms.CenterCrop(resize))
+        test_trans.insert(0, transforms.Resize(resize))
         # 训练集随机裁剪
         train_trans.insert(0, transforms.RandomResizedCrop(resize))
     train_trans = transforms.Compose(train_trans)
